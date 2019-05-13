@@ -84,4 +84,5 @@ public class Suitcase {
         Check if it is things.isEmpty() first. Then start with the first Thing
         which is this.things.get(index 0) and compare with each successive item
         in the list. If it's bigger, replace the "heaviest" variable.
+
  */
