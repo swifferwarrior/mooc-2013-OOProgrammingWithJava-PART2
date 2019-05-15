@@ -1,7 +1,8 @@
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Plane {
+
     //Can can go on various different flight routes
     private String planeID;
     private int capacity;
@@ -29,30 +30,22 @@ public class Plane {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-    
-    public void addFlight(String departureCode, String destinationCode){
+
+    public void addFlight(String departureCode, String destinationCode) {
         this.flights.add("(" + departureCode.toUpperCase() + "-" + destinationCode.toUpperCase() + ")");
     }
 
-    /*public String getFlight(int index){
-        this.flights.get(index);
-    }*/
-    
     public ArrayList<String> getFlights() {
         return flights;
     }
-    
-    
-    /*public void removeFlight(Flight flight){
-        this.flights.remove(flight);
 
-    }*/
-    
-    public String toString(){
+    public String getOneFlight() {
+        return this.flights.toString();
+    }
+
+    public String toString() {
         return this.planeID + " (" + this.capacity + " ppl)";
     }
-    
-    
 }
 
 /* POST-SUBMIT NOTES */

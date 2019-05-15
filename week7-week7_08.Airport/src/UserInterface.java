@@ -1,13 +1,13 @@
 
 import java.util.Scanner;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UserInterface {
 
     private Scanner reader = new Scanner(System.in);
     private Fleet fleet;
-    private ArrayList<String> keys;
+    private ArrayList<String> keys = new ArrayList<String>();
 
     public UserInterface() {
         this.fleet = new Fleet();
@@ -15,28 +15,29 @@ public class UserInterface {
 
     //AIRPORT PANEL
     public void startAirportPanel() {
-        System.out.print(panelHeader());
-        String operation = reader.next().toLowerCase();
+        System.out.println("Airport panel\n"
+                + "--------------------\n"
+                + "");
 
         while (true) {
+            System.out.print(panelHeader());
+            String operation = reader.next().toLowerCase();
+
             if (operation.equals("1".trim())) {
-                addAirplane();                                                  //THROWS ANOTHER NULL POINTER EXCEPTION
+                addAirplane();
             } else if (operation.equals("2".trim())) {
-                addFlight();                                                     //THROWS ANOTHER NULL POINTER EXCEPTION
+                addFlight();
             } else if (operation.equals("x".trim())) {
-                startFlightService();                                           //THROWS ANOTHER NULL POINTER EXCEPTION ***************
+                Collections.reverse(keys); //reverses order of Key list for printPlanes();
+                startFlightService();
                 break;
             }
         }
     }
-    
-    // AIRPORT PANEL METHODS
 
+    // AIRPORT PANEL METHODS
     public String panelHeader() {
-        String header = "Airport panel\n"
-                + "--------------------\n"
-                + ""
-                + "Choose operation: \n"
+        String header = "Choose operation: \n"
                 + "[1] Add airplane \n"
                 + "[2] Add flight \n"
                 + "[x] Exit\n"
@@ -50,10 +51,10 @@ public class UserInterface {
         String planeID = reader.next();
 
         askFor("plane capacity");
-        int capacity = Integer.parseInt(reader.next());                          //POSSIBLE NULL POINTER EXCEPTION???
+        int capacity = Integer.parseInt(reader.next());
 
-        keys.add(planeID);                                                      //THROWS ANOTHER NULL POINTER EXCEPTION
-        this.fleet.addPlane(planeID, new Plane(planeID, capacity));
+        keys.add(planeID);
+        this.fleet.addPlane(planeID, new Plane(planeID.toUpperCase(), capacity));
     }
 
     public void addFlight() {
@@ -68,16 +69,20 @@ public class UserInterface {
         askFor("destination airport code");
         String destinationCode = reader.next();
 
-        this.fleet.getPlane(key).addFlight(departureCode, destinationCode);     //THROWS ANOTHER NULL POINTER EXCEPTION
+        this.fleet.getPlane(key).addFlight(departureCode, destinationCode);     //THROWS ANOTHER NULL POINTER EXCEPTION *****************************Possibly from key retrieval
 
     }
 
     //FLIGHT SERVICE
     public void startFlightService() {
-        System.out.print(flightServiceHeader());
-        String operation = reader.next().toLowerCase();
+        System.out.println("Flight service\n"
+                + "------------\n"
+                + "\n");
 
         while (true) {
+            System.out.print(flightServiceHeader());
+            String operation = reader.next().toLowerCase();
+
             if (operation.equals("1".trim())) {
                 printPlanes();                                                  //THROWS ANOTHER NULL POINTER EXCEPTION
             } else if (operation.equals("2".trim())) {
@@ -93,10 +98,7 @@ public class UserInterface {
 
     //FLIGHT SERVICE METHODS
     public String flightServiceHeader() {
-        String header = "Flight service\n"
-                + "------------\n"
-                + "\n"
-                + "Choose operation:\n"
+        String header = "Choose operation:\n"
                 + "[1] Print planes\n"
                 + "[2] Print flights\n"
                 + "[3] Print plane info\n"
@@ -107,21 +109,16 @@ public class UserInterface {
     }
 
     public void printPlanes() {
-        //for (String key : this.fleet.{
-        for (String key : keys) {                                               //THROWS ANOTHER NULL POINTER EXCEPTION ************************************
-            /*      for (this.fleet.getPlane(key) : this.fleet)
-        }
-            
-        }
-        for (Fleet planes : this.fleet){
-            String key = "";*/
+        for (String key : keys) {
             System.out.println(this.fleet.getPlane(key));
         }
     }
 
     public void printFlights() {
-        for (String key : keys) {                                               //THROWS ANOTHER NULL POINTER EXCEPTION ****************************
-            System.out.println(this.fleet.getPlane(key).getFlights());
+        for (String key : keys) {
+            for (String flight : this.fleet.getPlane(key).getFlights()) {
+                System.out.println((this.fleet.getPlane(key)) + " " + flight);
+            }
         }
     }
 
@@ -129,8 +126,8 @@ public class UserInterface {
         askFor("plane ID");
         String key = reader.next();
 
-        System.out.println(this.fleet.getPlane(key).getFlights());              //THROWS ANOTHER NULL POINTER EXCEPTION
-
+        System.out.println(this.fleet.getPlane(key));
+        /*2. FLIGHT SERVICE 3 - prints square brackets around the flights and only lists one flight per plane.*/
     }
 
     public void askFor(String info) {
@@ -143,4 +140,17 @@ public class UserInterface {
 1. SCANNER
         You don't need to add scanner to the constructor. Just declare it as
         new Scanner(System.in) in a private variable.
+2. KEY ARRAYLIST INITIALIZATION
+        The ArrayList was initialized, but it didn't = new ArrayList<String>()
+        which threw a null pointer exception.
+3. PANEL AND FLIGHT SERVICE HEADERS
+        Separate the title and the operation menu.
+4. OPERATION INPUT
+        Place the Scanner input within the while loop to make it work as intended.
+5. PRINTING MULTIPLE FLIGHTS FOR A PLANE
+        Nested a for(String flight : flights) loop within a for(String key : keys)
+        The keys listed the particular plane. The nexted loop printed all the flights
+        for the plane individually without placing them in square brackets.
+6. REMEMBER
+    Refactor the Flight Service methods later.
  */
