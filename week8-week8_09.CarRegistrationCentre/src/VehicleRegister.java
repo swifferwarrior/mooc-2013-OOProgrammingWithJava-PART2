@@ -40,4 +40,36 @@ public class VehicleRegister {
         return true;
     }
 
+    public void printRegistrationPlates(){
+        //prints out all the registration plates stored
+        for (RegistrationPlate plates : this.owners.keySet()){
+            System.out.println(plates);
+        }
+    }
+    
+    public void printOwners(){
+        //prints all the car owners stored
+        //each owner's name has to be printed only once, even though they had more
+        //than one car.
+        ArrayList<String> previousPlates = new ArrayList<String>();
+        
+        for (String owner : this.owners.values()){
+            if (!previousPlates.contains(owner)){
+                System.out.println(owner);
+                previousPlates.add(owner);
+            }
+        }
+    }
 }
+
+/* POST-SUBMIT NOTES */
+/*
+1. PRINTING A HASHMAP
+        ArrayLists use a for() loop. For hashmaps, it is for every [object] in
+        a keyset versus a list.
+2. PRINTING OWNERS
+        Set an ArrayList to hold a list of previously named owners.
+3. REMEMBER ABOUT HASHMAPS
+        Hashmap is (key, value). In this case, RegistrationPlate was the key and
+        owners was the value.
+*/
