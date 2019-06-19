@@ -1,6 +1,7 @@
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
 
 public class Storehouse {
     private Map<String, Integer> product;
@@ -45,17 +46,31 @@ public class Storehouse {
         //product cannot go below zero
         if (this.productAmount.containsKey(product)){
             int newStock = this.productAmount.get(product);
-            if (this.productAmount.
-            return true;
-        } else 
-
+            if (newStock > 0){
+                newStock--;
+                this.productAmount.remove(product);
+                this.productAmount.put(product, newStock);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
         return false;
     }
     
     public Set<String> products() {
         //returns a name set of the products contained in the storehouse
-        return null;
+        Set<String> tempSet = new HashSet<String>();
+        
+       for (String key : this.productAmount.keySet()){
+            tempSet.add(key);
+        }
+       
+       return tempSet;
     }
+    
+    
 }
 
 /* POST-SUBMIT NOTES */
@@ -68,4 +83,6 @@ public class Storehouse {
     products have to be stored into a Map<String, Integer> variable! The type of 
     the object so created can be HashMap, but you should use the interface Map 
     for the variable type (see 40.4.2)
+2. SET() METHOD
+    This is an array of hashcodes, so a HashSet needs to be made
 */
