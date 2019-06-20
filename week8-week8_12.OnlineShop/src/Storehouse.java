@@ -1,76 +1,77 @@
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
 
 public class Storehouse {
+
     private Map<String, Integer> product;
     private Map<String, Integer> productAmount;
 
     public Storehouse() {
-        this.product = new HashMap<String, Integer> ();
-        this.productAmount = new HashMap<String, Integer> ();
+        this.product = new HashMap<String, Integer>();
+        this.productAmount = new HashMap<String, Integer>();
     }
-    
-    public void addProduct (String product, int price, int stock){
+
+    public void addProduct(String product, int price, int stock) {
         //adds a product whose price and number of stocks to the storehouse
-        for (int i = 0; i < stock; i++){
+        for (int i = 0; i < stock; i++) {
             this.product.put(product, price);
             this.productAmount.put(product, stock);
         }
     }
-    
-    public int price (String product) {
+
+    public int price(String product) {
         //returns the price of teh parameter product
         //if the produt is not available in teh storehouse, the method returns -99
-        if(this.product.containsKey(product)){
+        if (this.product.containsKey(product)) {
             return this.product.get(product);
         } else {
             return -99;
         }
     }
-    
-    public int stock (String product) {
+
+    public int stock(String product) {
         //returns the stock of the parameter product
-        if (this.productAmount.containsKey(product)){
+        if (this.productAmount.containsKey(product)) {
             return this.productAmount.get(product);
         } else {
             return 0;
         }
     }
-    
-    public boolean take (String product){
+
+    public boolean take(String product) {
         //decreases the stock of the parameter product by one
         //returns true if the object was available in the storehouse
         //if product not in storehouse, method returns false
         //product cannot go below zero
-        if (this.productAmount.containsKey(product)){
-            int newStock = this.productAmount.get(product);
-            if (newStock > 0){
+        int newStock = 0;
+        
+        if (this.productAmount.containsKey(product)) {
+            newStock = this.productAmount.get(product);
+            if (newStock > 0) {
                 newStock--;
-                this.productAmount.remove(product);
-                this.productAmount.put(product, newStock);
+                this.productAmount.replace(product, newStock);
                 return true;
             } else {
                 return false;
             }
         }
-        
         return false;
     }
-    
+
     public Set<String> products() {
         //returns a name set of the products contained in the storehouse
         Set<String> tempSet = new HashSet<String>();
-        
-       for (String key : this.productAmount.keySet()){
+
+        for (String key : this.productAmount.keySet()) {
             tempSet.add(key);
         }
-       
-       return tempSet;
+
+        return tempSet;
     }
-    
-    
+
 }
 
 /* POST-SUBMIT NOTES */
@@ -85,4 +86,7 @@ public class Storehouse {
     for the variable type (see 40.4.2)
 2. SET() METHOD
     This is an array of hashcodes, so a HashSet needs to be made
+3. TAKE() METHOD
+    Rather than removing old product with outdated amount and putting in new product
+    with correct amount, use the replace() method.
 */

@@ -1,11 +1,16 @@
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        Purchase purchase = new Purchase("milk", 4, 2);
-        System.out.println( "the total price of a purchase containing four milks is " + purchase.price() );
-        System.out.println( purchase );
-        purchase.increaseAmount();
-        System.out.println( purchase );
+        Storehouse store = new Storehouse();
+        store.addProduct("coffee", 5, 10);
+        store.addProduct("milk", 3, 20);
+        store.addProduct("milkbutter", 2, 55);
+        store.addProduct("bread", 7, 8);
+
+        Shop shop = new Shop(store, new Scanner(System.in));
+        shop.manage("Pekka");
     }
 }

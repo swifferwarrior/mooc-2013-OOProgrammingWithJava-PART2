@@ -1,5 +1,6 @@
 
 public class Purchase {
+
     private String product;
     private int amount;
     private int unitPrice;
@@ -9,19 +10,19 @@ public class Purchase {
         this.amount = amount;
         this.unitPrice = unitPrice;
     }
-    
+
     public int price() {
         //returns the purchase price;
         int price = this.amount * this.unitPrice;
         return price;
     }
-    
-    public void increaseAmount(){
+
+    public void increaseAmount() {
         this.amount++;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.product + ": " + this.amount;
     }
 }
