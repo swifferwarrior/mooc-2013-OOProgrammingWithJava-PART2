@@ -1,4 +1,5 @@
-public class Card {
+
+public class Card implements Comparable<Card> {
 
     /*
      * These are static constant variables. These variables can be used inside and outside
@@ -36,4 +37,19 @@ public class Card {
         return suit;
     }
 
+    @Override
+    public int compareTo(Card other) {
+        if (this.value == other.value) {
+            return this.suit - other.getSuit();
+        } else {
+            return this.value - other.value;
+        }
+    }
 }
+
+/* POST-SUBMIT NOTES */
+/*
+1. SORTING BY SUIT
+        After creating the SortAgainstSuitAndValue comparator, the Card class
+        needed to do the same.
+*/
