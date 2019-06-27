@@ -1,57 +1,82 @@
+
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Jump {
+
     private int length;
+    private List judgeVotes;
     private int adjustedScore;
-    private int totalScore;
+    private int totalJumpScore;
     private Random random = new Random();
 
     public Jump() {
         this.length = 0;
+        this.judgeVotes = new ArrayList<Integer>();
         this.adjustedScore = 0;
-        this.totalScore = 0;
+        this.totalJumpScore = 0;
     }
 
-
-    
-    public int judgeScore(){
-        int judgeScore = (10 + random.nextInt(10));
-        return judgeScore;
-    }
-    
-    public int panelScore(){
-        List scores = new ArrayList<Object>();
-        
-        for (Integer i =0; i > 5; i++){
-            scores.add(judgeScore());
-        }
-        
-        System.out.println("Amount of scores: " + scores.size());       //test
-        
-        Collections.sort(scores);
-        scores.remove(Collections.max(scores));
-        scores.remove(Collections.min(scores));
-        
-        for (Object score : scores){
-            System.out.println("Ind Score: " + score);                  //test
-            this.adjustedScore += (Integer)score;
-        }
-        
-        return this.adjustedScore;
-    }
-    
-    public int jumpLength(){
+    public int getJumpLength() {
         this.length = 60 + random.nextInt(60);
         return this.length;
     }
-    
-    public int totalScore(){
-        this.totalScore = this.length + this.adjustedScore;
-        return this.totalScore;
+
+    public void printJumpLength() {
+        System.out.println("length: " + this.length);
     }
     
+    public int judgeScore() {
+        int judgeScore = (10 + random.nextInt(10));
+        return judgeScore;
+    }
+
+    public void panelScore() {
+        //List scores = new ArrayList<Object>();
+
+        for (Integer i = 0; i > 5; i++) {
+            this.judgeVotes.add(judgeScore());
+        }
+
+        System.out.println("Amount of scores: " + this.judgeVotes.size());       //test
+
+    }
+
+    public void printPanelScore() {
+        if (judgeVotes.size() < 5) {
+            System.out.println("The judges have not finished scoring!");
+        } else {
+            System.out.print("judge votes: [");
+            for (int i = 0; i < (this.judgeVotes.size() - 1); i++) {
+                System.out.print(judgeVotes.get(i) + ", ");
+            }
+            System.out.println(judgeVotes.get(4) + "]");
+        }
+    }
+
+    public void adjustScore() {
+        Collections.sort(judgeVotes);
+        judgeVotes.remove(Collections.max(judgeVotes));
+        judgeVotes.remove(Collections.min(judgeVotes));
+
+        for (Object score : judgeVotes) {
+            System.out.println("Ind Score: " + score);                  //test
+            this.adjustedScore += (Integer) score;
+        }
+        //return this.adjustedScore;
+    }
+
+    public int getTotalJumpScore() {
+        this.totalJumpScore = this.length + this.adjustedScore;
+        return this.totalJumpScore;
+    }
     
+    @Override
+    public String toString() {
+        return "Total length: " + this.length + "\n"
+                + "Total jump score: " + this.totalJumpScore;
+    }
+
 }

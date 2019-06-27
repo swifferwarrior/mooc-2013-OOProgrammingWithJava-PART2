@@ -20,12 +20,10 @@ public class Main {
                     //lengths of the jumps
                 //Sort by highest to lowest points
                 
-        Jump one = new Jump();
+        Interface start = new Interface();
         
-        System.out.println(one.jumpLength());
-        System.out.println(one.panelScore());
-        System.out.println("");
-        System.out.println("Total Score: " + one.totalScore());
+        start.registration();
+
                 
     }
 }
