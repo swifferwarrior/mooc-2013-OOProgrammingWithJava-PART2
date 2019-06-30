@@ -1,4 +1,3 @@
-//NOTE - SkiJumper must be saved as HashMap <String, Jump>
 import java.util.List;
 import java.util.ArrayList;
 
@@ -16,10 +15,6 @@ public class SkiJumper {
     public String getName() {
         return this.name;
     }
-
-/*    public int getTotalPlayerPoints() {
-        return this.totalPlayerPoints;
-    }*/
     
     public void addJump(Jump jump){
         this.jumps.add(jump);
@@ -38,16 +33,21 @@ public class SkiJumper {
         return this.jumps.get(index);
     }
     
-    public void printJumps(){                               //make this return a String
-        for (Jump iteration : jumps){
-            System.out.println(iteration.jumpLength());
+   public void printJumps(){
+       System.out.print("jump lengths: "); 
+       for (Jump round : jumps){
+           if( round == jumps.get(jumps.size()-1)){
+                break;
+           }
+           System.out.print(round.getJumpLength() + " m, ");                     //creating a new jump length, not reporting the old one
         }
+        System.out.println(jumps.get(jumps.size()-1).getJumpLength() + " m");
     }
 
     @Override
     public String toString() {
         return "Jumper: " + this.name + "\n"
-                + "Jumps: " + printJumps();
+                + "Jumps: " + this.jumps;
     }
     
     
