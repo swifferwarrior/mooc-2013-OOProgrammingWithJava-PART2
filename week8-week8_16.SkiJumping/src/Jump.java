@@ -22,7 +22,7 @@ public class Jump {
     public void setJumpLength() {
         this.length = 60 + random.nextInt(60);
     }
-    
+
     public int getJumpLength() {
 
         return this.length;
@@ -31,34 +31,26 @@ public class Jump {
     public void printJumpLength() {
         System.out.println("length: " + this.length);
     }
-    
+
     public int judgeScore() {
         int judgeScore = (10 + random.nextInt(10));
         return judgeScore;
     }
 
     public void panelScore() {
-        //List scores = new ArrayList<Object>();
 
         for (Integer i = 0; i < 5; i++) {
             this.judgeVotes.add(judgeScore());
         }
-
-        //System.out.println("Amount of scores: " + this.judgeVotes.size());       //test
-
     }
 
     public void printPanelScore() {
-        //if (judgeVotes.size() < 5) {
-        //    System.out.println("The judges have not finished scoring!");
-        //} else {
         panelScore();
-            System.out.print("judge votes: [");
-            for (int i = 0; i < (this.judgeVotes.size()-1); i++) {
-                System.out.print(judgeVotes.get(i) + ", ");
-            }
-            System.out.println(judgeVotes.get(this.judgeVotes.size()-1) + "]");
-        //}
+        System.out.print("judge votes: [");
+        for (int i = 0; i < (this.judgeVotes.size() - 1); i++) {
+            System.out.print(judgeVotes.get(i) + ", ");
+        }
+        System.out.println(judgeVotes.get(this.judgeVotes.size() - 1) + "]");
     }
 
     public void adjustScore() {
@@ -67,17 +59,15 @@ public class Jump {
         judgeVotes.remove(Collections.min(judgeVotes));
 
         for (Object score : judgeVotes) {
-            //System.out.println("Ind Score: " + score);                  //test
             this.adjustedScore += (Integer) score;
         }
-        //return this.adjustedScore;
     }
 
     public int getTotalJumpScore() {
         this.totalJumpScore = this.length + this.adjustedScore;
         return this.totalJumpScore;
     }
-    
+
     @Override
     public String toString() {
         return "Total length: " + this.length + "\n"
