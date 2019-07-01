@@ -7,7 +7,7 @@ import java.util.Collections;
 public class Interface {
 
     private Scanner scanner = new Scanner(System.in);
-    private List <SkiJumper> participants;
+    private List<SkiJumper> participants;
     private int rounds;
     private SortAgainstPoints pointSorter = new SortAgainstPoints();
 
@@ -26,14 +26,13 @@ public class Interface {
             String name = scanner.nextLine();
             if (name.equals("")) {
                 break;
-            }            
+            }
             this.participants.add(new SkiJumper(name));
         }
-        
+
         System.out.println("");
-        //System.out.println(this.participants.size() + " participants. This is a test to check size vs index.");
         System.out.println("The tournament begins!");
-        startTournament();                                   //INDEX OUT OF BOUNDS
+        startTournament();
     }
 
     public void startTournament() {
@@ -67,37 +66,36 @@ public class Interface {
         System.out.println("Jumping order:");
         Collections.sort(participants, pointSorter);
         Collections.reverseOrder();
-        
-        for (SkiJumper jumper : (ArrayList<SkiJumper>)this.participants) {
+
+        for (SkiJumper jumper : (ArrayList<SkiJumper>) this.participants) {
             System.out.println("  " + number + ". " + jumper.getName() + " (" + jumper.getTotalPoints() + " points)");
             number++;
         }
     }
-    
+
     public void printJumpResults() {
         System.out.println("");
         System.out.println("Results of round " + this.rounds);
-        
-        for (SkiJumper jumper : (ArrayList<SkiJumper>)this.participants){
+
+        for (SkiJumper jumper : (ArrayList<SkiJumper>) this.participants) {
             System.out.println("  " + jumper.getName());
             jumper.addJump(new Jump());
-            jumper.getJump(this.rounds-1).setJumpLength();
-            System.out.println("    length: " + jumper.getJump(this.rounds-1).getJumpLength());
+            jumper.getJump(this.rounds - 1).setJumpLength();
+            System.out.println("    length: " + jumper.getJump(this.rounds - 1).getJumpLength());
             System.out.print("    ");
-            jumper.getJump(this.rounds-1).printPanelScore();
-            jumper.getJump(this.rounds-1).adjustScore();
+            jumper.getJump(this.rounds - 1).printPanelScore();
+            jumper.getJump(this.rounds - 1).adjustScore();
         }
     }
-    
-    public void printTournamentResults(){
-        //Collections.sort(this.participants, pointSorter);
-        //Collections.reverseOrder(this.pointSorter);
+
+    public void printTournamentResults() {
+        Collections.sort(participants, pointSorter);
+        Collections.reverse(participants);
         System.out.println("");
         System.out.println("Tournament results:");
         System.out.println("Position    Name");
-        Collections.sort(participants);
-        for (SkiJumper jumper : this.participants){
-            System.out.println((this.participants.indexOf(jumper)+1) + "           "
+        for (SkiJumper jumper : participants) {
+            System.out.println((participants.indexOf(jumper) + 1) + "           "
                     + jumper.getName() + " (" + jumper.getTotalPoints() + " points)");
             System.out.print("            ");
             jumper.printJumps();
@@ -106,9 +104,12 @@ public class Interface {
 }
 
 /* POST-SUBMIT NOTES */
-/*
+ /*
 1. OUT OF BOUNDS EXCEPTION DURING THE printJumpResults()
         Problem: https://www.reddit.com/r/learnjava/comments/c73qi9/mooc_java_ski_jumper_excercise_trying_to_pinpoint/
         Added line 79: new Jump
         Throwing the exception because jumps weren't actually being added to the 'jumps' list each round
-*/
+2. PRINTING TOURNAMENT RESULTS
+        Learn when to use this(). Was originally sorting this.participants rather
+        than participants which means the results weren't being sorted.
+ */
