@@ -2,12 +2,14 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Interface {
 
     private Scanner scanner = new Scanner(System.in);
     private List <SkiJumper> participants;
     private int rounds;
+    private SortAgainstPoints pointSorter = new SortAgainstPoints();
 
     public Interface() {
         this.participants = new ArrayList<SkiJumper>();
@@ -20,7 +22,7 @@ public class Interface {
         System.out.println("Write the names of the participants one at a time; an empty string brings you to the jumping phase.");
 
         while (true) {
-            System.out.print("Participant name: ");
+            System.out.print("  Participant name: ");
             String name = scanner.nextLine();
             if (name.equals("")) {
                 break;
@@ -36,13 +38,13 @@ public class Interface {
 
     public void startTournament() {
         System.out.println("");
-        System.out.print("Write 'jump' to jump; otherwise you quit: ");
+        System.out.print("Write \"jump\" to jump; otherwise you quit: ");
         String input = scanner.nextLine();
 
         while (input.equals("jump")) {
             startRound();
             System.out.println("");
-            System.out.print("Write 'jump' to jump; otherwise you quit: ");
+            System.out.print("Write \"jump\" to jump; otherwise you quit: ");
             input = scanner.nextLine();
         }
         System.out.println("");
@@ -63,7 +65,9 @@ public class Interface {
         int number = 1;
         System.out.println("");
         System.out.println("Jumping order:");
-
+        Collections.sort(participants, pointSorter);
+        Collections.reverseOrder();
+        
         for (SkiJumper jumper : (ArrayList<SkiJumper>)this.participants) {
             System.out.println("  " + number + ". " + jumper.getName() + " (" + jumper.getTotalPoints() + " points)");
             number++;
@@ -86,9 +90,12 @@ public class Interface {
     }
     
     public void printTournamentResults(){
+        //Collections.sort(this.participants, pointSorter);
+        //Collections.reverseOrder(this.pointSorter);
         System.out.println("");
         System.out.println("Tournament results:");
         System.out.println("Position    Name");
+        Collections.sort(participants);
         for (SkiJumper jumper : this.participants){
             System.out.println((this.participants.indexOf(jumper)+1) + "           "
                     + jumper.getName() + " (" + jumper.getTotalPoints() + " points)");

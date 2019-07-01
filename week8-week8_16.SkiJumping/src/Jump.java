@@ -40,7 +40,7 @@ public class Jump {
     public void panelScore() {
         //List scores = new ArrayList<Object>();
 
-        for (Integer i = 0; i < 4; i++) {
+        for (Integer i = 0; i < 5; i++) {
             this.judgeVotes.add(judgeScore());
         }
 
@@ -54,7 +54,7 @@ public class Jump {
         //} else {
         panelScore();
             System.out.print("judge votes: [");
-            for (int i = 0; i < (this.judgeVotes.size()); i++) {
+            for (int i = 0; i < (this.judgeVotes.size()-1); i++) {
                 System.out.print(judgeVotes.get(i) + ", ");
             }
             System.out.println(judgeVotes.get(this.judgeVotes.size()-1) + "]");

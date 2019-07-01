@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class SkiJumper {
+public class SkiJumper implements Comparable<SkiJumper> {
     private String name;
     private List <Jump> jumps;
     private int totalPlayerPoints;
@@ -50,5 +50,17 @@ public class SkiJumper {
                 + "Jumps: " + this.jumps;
     }
     
-    
+    @Override
+    public int compareTo (SkiJumper jumper) {
+        return this.totalPlayerPoints - jumper.getTotalPoints();
+    /*
+            if(this.totalPlayerPoints == jumper.getTotalPoints()){
+                return 0;
+            } else if (this.totalPlayerPoints > jumper.getTotalPoints()){
+                return 1;
+            } else {
+                return -1;    
+            }
+    */
+    }
 }
