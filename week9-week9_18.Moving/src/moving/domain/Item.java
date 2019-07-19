@@ -9,7 +9,8 @@ package moving.domain;
  *
  * @author Admin
  */
-public class Item implements Thing {
+public class Item implements Thing, Comparable {
+
     private String name;
     private int volume;
 
@@ -17,17 +18,22 @@ public class Item implements Thing {
         this.name = name;
         this.volume = volume;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    
-    public int getVolume(){
+
+    public int getVolume() {
         return this.volume;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return name + " (" + volume + " dm^3)";
+    }
+
+    @Override
+    public int compareTo(Item compared) {
+        this.volume - compared.volume;
     }
 }
