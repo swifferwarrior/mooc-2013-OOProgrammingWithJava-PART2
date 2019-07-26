@@ -5,10 +5,6 @@
  */
 package application;
 
-/**
- *
- * @author spoon
- */
 public class ConstantSensor implements Sensor{
     private int number;
 
