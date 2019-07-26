@@ -9,14 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class AverageSensor implements Sensor{
-    private int number;
     private List <Sensor> sensors = new ArrayList <Sensor>();
-
-    public AverageSensor(int number) {
-        this.number = number;
-    }
-    
-    
     
     public boolean isOn(){  // returns true if the sensor is on
         int i = 0;
@@ -64,5 +57,15 @@ public class AverageSensor implements Sensor{
     public void addSensor (Sensor additional){
         //adds a new sensor to the AverageSensor
         sensors.add(additional);
+    }
+    
+    public List<Integer> readings (){
+        //returns a list of the reading results of all the measurements executed
+        //through your AverageSensor
+        System.out.println("[");
+        for (int i = 0; i < (sensors.size()-1); i++){
+            System.out.println(sensors.get(i) + ", ");
+        }
+        System.out.println(sensors.get(sensors.size()) + "]");
     }
 }

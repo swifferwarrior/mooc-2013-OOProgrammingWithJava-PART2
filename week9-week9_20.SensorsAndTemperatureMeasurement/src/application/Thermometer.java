@@ -16,21 +16,24 @@ public class Thermometer implements Sensor {
         this.isOn = false;
     }
 
+    @Override
     public boolean isOn() {
-        if (isOn) {
-            return true;
-        }
+            return this.isOn;
+    }
     
     
 
+    @Override
     public void on() {
         this.isOn = true;
     }
 
+    @Override
     public void off() {
         this.isOn = false;
     }
 
+    @Override
     public int measure() {
         if (isOn()) {
             int measurement = random.nextInt(60) - 30;
