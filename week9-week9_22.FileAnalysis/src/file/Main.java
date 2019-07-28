@@ -11,5 +11,6 @@ public class Main {
         Analysis test = new Analysis(file);
         
         System.out.println("Lines: " + test.lines());
+        System.out.println("Characters: " + test.characters());
     }
 }
