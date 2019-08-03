@@ -8,29 +8,31 @@ import java.util.ArrayList;
 public class WordInspection {
 
     private File file;
-    private List<String> wordList;
-    private List<String> wordsWithL;
-    private List<String> wordsWithZ;
-    private List<String> palindromes;
-    private final String VOWELS = "aeiouyäö";
+    //private List<String> wordList = new ArrayList<String>();
 
     public WordInspection(File file) {
         this.file = file;
-        this.wordList = new ArrayList<String>();
-        this.wordsWithL = new ArrayList<String>();
-        this.wordsWithZ = new ArrayList<String>();
-        this.palindromes = new ArrayList<String>();
     }
+    
+    //private Scanner reader = new Scanner(this.file, "UTF-8");
 
-    public int wordCount() throws Exception{
+    /*public List<String> wordList(File file) throws Exception{
+        Scanner reader = new Scanner(file, "UTF-8");
+        
+        while (reader.hasNextLine()){
+            String word = reader.nextLine();
+            wordList.add(word);
+        }
+        return wordList;
+    }*/
+    
+    public int wordCount() throws Exception {
         //counts the file words and prints their number
         Scanner reader = new Scanner(file, "UTF-8");
         int wordCount = 0;
-        String buffer = "";
 
         while (reader.hasNextLine()) {
-            buffer = reader.nextLine();
-            wordList.add(buffer);
+            reader.nextLine();
             wordCount++;
         }
         return wordCount;
@@ -38,59 +40,75 @@ public class WordInspection {
 
     public List<String> wordsContainingZ() throws Exception {
         //returns all the file words with contain a 'Z'
-        for (String word : wordList) {
+        Scanner reader = new Scanner(file, "UTF-8");
+        List<String> wordsWithZ = new ArrayList<String>();
+
+        while (reader.hasNextLine()) {
+            String word = reader.nextLine();
             if (word.contains("z")) {
-                this.wordsWithZ.add(word);
+                wordsWithZ.add(word);
             }
         }
-        return this.wordsWithZ;
+        return wordsWithZ;
     }
 
     public List<String> wordsEndingInL() throws Exception {
         //returns all the Finnish words of the file which end in "L"
-        for (String word : wordList) {
-            char letter = word.charAt(word.length() - 1);
+        Scanner reader = new Scanner(file, "UTF-8");
+        List<String> wordsWithL = new ArrayList<String>();
 
-            if (letter == 'l') {
-                this.wordsWithL.add(word);
+        while (reader.hasNextLine()) {
+            String word = reader.nextLine();
+
+            if (word.endsWith("l")) {
+                wordsWithL.add(word);
             }
         }
 
-        return this.wordsWithL;
+        return wordsWithL;
     }
 
     public List<String> palindromes() throws Exception {
         //returns all the palindrome words of the file
-        for (String word : wordList) {
-            String reverse = reverse(word);
-            if (word.equals(reverse)) {
-                this.palindromes.add(word);
+        Scanner reader = new Scanner(file, "UTF-8");
+        List<String> palindromes = new ArrayList<String>();
+
+        while (reader.hasNextLine()) {
+            String word = reader.nextLine();            
+            String reverseWord = reverse(word);
+            
+            if (word.equals(reverseWord)) {
+                palindromes.add(word);
             }
+            reverseWord = "";
         }
 
-        return this.palindromes;
+        return palindromes;
     }
 
-    public String reverse(String word){ //method to be used with palindromes()
+    public String reverse(String word) { //method to be used with palindromes()
         String reverseWord = "";
         int wordLength = word.length();
         char reverseLetter = word.charAt(wordLength - 1);
 
-        while (wordLength > 1) {
+        while (wordLength > 1){
             reverseWord += reverseLetter;
             wordLength--;
             reverseLetter = word.charAt(wordLength - 1);
         }
+        reverseWord += reverseLetter;
         return reverseWord;
     }
 
-    public List<String> wordsWhichContainAllVowels() throws Exception{
+    public List<String> wordsWhichContainAllVowels() throws Exception {
         //returns all the words of the file which contain all Finnish vowels:
         //aeiouyäö
         List<String> vowelWords = new ArrayList<String>();
+        Scanner reader = new Scanner(this.file, "UTF-8");
 
-        for (String word : wordList) {
-            if (       word.contains("a")
+        while (reader.hasNextLine()) {
+            String word = reader.nextLine();
+            if (word.contains("a")
                     && word.contains("e")
                     && word.contains("i")
                     && word.contains("o")
