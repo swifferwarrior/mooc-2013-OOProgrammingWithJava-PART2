@@ -6,11 +6,20 @@
 package UserInterface;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Interface {
 
     private Scanner reader = new Scanner(System.in);
+    private People people;
 
+    public Interface() {
+        this.people = new People();
+    }
+    
     public void start() {
         System.out.println(
                 "phone search" + "\n"
@@ -30,76 +39,43 @@ public class Interface {
 
     public void command() {
         System.out.print("command: ");
-        String command = reader.next();
+            String command = reader.next();
         //have a bunch of "if" expressions here based on imput
 
         while (true) {
             if (command.equals("1")) {
                 //add a number
-                System.out.print("whose number: ");
-                String who = reader.next();
-                System.out.print("number: ");
-                String number = reader.next();
+                addNumber();
             }
 
             if (command.equals("2")) {
                 //search for a number
-                System.out.print("whose number: ");
-                String who = reader.next();
-                String number = reader.next();
+                searchForNumber();
             }
 
             if (command.equals("3")) {
                 //search for a person by phone number
-                System.out.println("number: ");
-                String number = reader.next();
-                if (number 
-                    exists
-                
-                    ){
-                    System.out.println(person);
-                }else {
-                    System.out.println(" not found");
-            }
+                searchByNumber();
             }
 
             if (command.equals("4")) {
                 //add an address
-                System.out.println("whose address: ");
-                System.out.println("street: ");
-                System.out.println("city: ");
+                addAddress();
             }
 
             if (command.equals("5")) {
                 //search for personal information
-                System.out.println("whose information: ");
-                //get who
-                System.out.println(" address: " + address);
-                System.out.println("phone numbers: ");
-                for (number  : phone {
-                    list
-                }
-                
-                    ){
-                        System.out.println("  " + number);
-                }
+                personalInfo();
             }
 
             if (command.equals("6")) {
                 //delete personal information
-                System.out.println("whose information: ");
+                removePersonalInfo();
             }
 
             if (command.equals("7")) {
-                //filtered listeing
-                System.out.println("keyword (if empty, all listed): ");
-                if (not 
-                    found
-                
-                    ){
-                    System.out.println(" not found");
-                }
-
+                //filtered listing
+                keywordSearch();
             }
 
             if (command.equals("x")) {
@@ -107,4 +83,87 @@ public class Interface {
             }
         }
     }
+
+    public void addNumber() {
+        System.out.print("whose number: ");
+            String who = reader.next();
+        System.out.print("number: ");
+            String number = reader.next();
+            
+        people.get(0)
+    }
+
+    public void searchForNumber() {
+        System.out.print("whose number: ");
+        String who = reader.next();
+        String number = reader.next();
+    }
+
+    public void searchByNumber() {
+        System.out.println("number: ");
+        String number = reader.next();
+        if (number 
+                    
+            exists
+                
+        
+            ){
+                    System.out.println(person);
+        }else {
+                    System.out.println(" not found");
 }
+    }
+
+    public void addAddress() {
+        System.out.println("whose address: ");
+        System.out.println("street: ");
+        System.out.println("city: ");
+    }
+
+    public void personalInfo() {
+        System.out.println("whose information: ");
+        //get who
+        System.out.println(" address: " + address);
+        System.out.println("phone numbers: ");
+        for (number   : phone {
+            list
+        }
+        )
+        {
+            System.out.println("  " + number);
+        }
+    }
+
+    public void removePersonalInfo() {
+        System.out.println("whose information: ");
+    }
+
+    public void keywordSearch() {
+        System.out.println("keyword (if empty, all listed): ");
+        if (not 
+                    
+            found
+                
+        
+            ){
+                    System.out.println(" not found");
+        }
+
+    }
+}
+/*
+Notes:
+
+HashMap <Person, String#> People
+HashMap <String, Person> Numbers
+
+or
+
+Person has String name and String number
+HashMap String, String for both
+
+Person class
+    String address
+    <String> number
+    String name
+ */
