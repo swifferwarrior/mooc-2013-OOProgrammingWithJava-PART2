@@ -7,29 +7,32 @@ import java.util.ArrayList;
 
 public class PersonalInfo {
     private String name;
-    private List <String> numbers;
-    private String address;
+    List <String> numbers;
+    private String street;
+    private String city;
 
     public PersonalInfo() {
         this.name = "";
         this.numbers = new ArrayList<String>();
-        this.address = "";
+        this.city = "";
+        this.street = "";
     }
 
     public List<String> getNumbers() {
-        return numbers;
+        return this.numbers;
     }
 
     public String getAddress() {
-        return address;
+        return this.street + " " + this.city;
     }
 
     public String getName() {
         return name;
     }
     
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String street, String city) {
+        this.street = street;
+        this.city = city;
     }
 
     public void addNumber(String number){
