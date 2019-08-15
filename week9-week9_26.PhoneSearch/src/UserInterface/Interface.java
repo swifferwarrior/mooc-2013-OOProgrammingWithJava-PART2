@@ -14,10 +14,10 @@ import java.util.Map;
 public class Interface {
 
     private Scanner reader = new Scanner(System.in);
-    private People people;
+    private Map<String, PersonalInfo> people;
 
     public Interface() {
-        this.people = new People();
+        this.people = new HashMap<String, PersonalInfo>();
     }
     
     public void start() {
@@ -90,19 +90,31 @@ public class Interface {
         System.out.print("number: ");
             String number = reader.next();
             
-        people.get(0)
+        try{
+            people.get(who).addNumber(number);
+        } catch (NullPointerException e){
+            people.put(who, new PersonalInfo());
+            people.get(who).addNumber(number);
+        }
     }
 
     public void searchForNumber() {
         System.out.print("whose number: ");
         String who = reader.next();
-        String number = reader.next();
+        
+        //String number = reader.next();
+        try{
+        people.get(who).getNumbers();
+        } catch (NullPointerException e){
+            System.out.println("not found");
+        }
     }
 
     public void searchByNumber() {
         System.out.println("number: ");
-        String number = reader.next();
-        if (number 
+            String number = reader.next();
+        
+        /*if (number 
                     
             exists
                 
@@ -111,7 +123,7 @@ public class Interface {
                     System.out.println(person);
         }else {
                     System.out.println(" not found");
-}
+}*/
     }
 
     public void addAddress() {
@@ -119,6 +131,7 @@ public class Interface {
         System.out.println("street: ");
         System.out.println("city: ");
     }
+    
 
     public void personalInfo() {
         System.out.println("whose information: ");
