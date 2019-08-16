@@ -214,20 +214,52 @@ public class Interface {
         command();
     }
 
-    /*
     public void keywordSearch() {
         System.out.println("keyword (if empty, all listed): ");
-        if (not 
-                    
-            found
-                
+        String keyword = reader.next();
         
-            ){
-                    System.out.println(" not found");
+        List<String> namesAndAddresses = new ArrayList<String>();
+            
+        for (String name : people.keySet()){
+                namesAndAddresses.add(name);
+                namesAndAddresses.add(people.get(name).getAddress());
+            }
+        
+        namesAndAddresses.sort(c);
+        
+        //add for loop for keyset to nest the following in
+        for (String item : namesAndAddresses){
+            if(item.contains(keyword)){
+                        if (people.get(item).getAddress().equals(" ")) {
+            System.out.println(" address unknown");
+        } else {
+        
+            try {
+
+                System.out.println(" address: " + people.get(item).getAddress());
+            } catch (Exception e) {
+                System.out.println("  address unknown");
+            }
+        }
+
+        if (people.get(item).getNumbers().isEmpty()) {
+            System.out.println("  phone number not found");
+        } else {
+
+            try {
+                System.out.println(" phone numbers: ");
+                for (String number : people.get(item).numbers) {
+                    System.out.println("  " + number);
+                }
+            } catch (Exception e) {
+                System.out.println("  phone number not found");
+            }
+        } else {
+            System.out.println(" not found");
         }
 
     }
-     */
+     
 }
 /*
 Notes:
