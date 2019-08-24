@@ -17,6 +17,13 @@ public class PersonalInfo {
         this.city = "";
         this.street = "";
     }
+    
+    public PersonalInfo(String name){
+        this.name = name;
+        this.numbers = new ArrayList<String>();
+        this.city = "";
+        this.street = "";        
+    }
 
     public List<String> getNumbers() {
         return this.numbers;

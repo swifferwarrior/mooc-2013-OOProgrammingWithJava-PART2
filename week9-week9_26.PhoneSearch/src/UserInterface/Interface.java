@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 public class Interface {
@@ -74,17 +75,18 @@ public class Interface {
 
             if (command.equals("7")) {
                 //filtered listing
-                //keywordSearch();
-                System.out.println("uncomment keywordSearch()");
+                keywordSearch();
+                //System.out.println("uncomment keywordSearch()");
             }
 
             if (command.equals("x")) {
                 System.out.println("Goodbye!");
                 break;
+                /*
             } else {
                 System.out.println("not an option" + "\n");
                 System.out.print("command: ");
-                command = reader.next();
+                command = reader.next();*/
             }
         }
     }
@@ -132,17 +134,17 @@ public class Interface {
         System.out.print("number: ");
         String numberQuery = reader.next();
         boolean found = false;
-        
-        for (String key : people.keySet()){
-            for (String number : people.get(key).getNumbers()){
-                if (number.equals(numberQuery)){
+
+        for (String key : people.keySet()) {
+            for (String number : people.get(key).getNumbers()) {
+                if (number.equals(numberQuery)) {
                     System.out.println(" " + key);
                     found = true;
                 }
             }
-        if (!found){
-            System.out.println(" not found");
-        }
+            if (!found) {
+                System.out.println(" not found");
+            }
         }
 
         System.out.println("");
@@ -177,7 +179,7 @@ public class Interface {
         if (people.get(who).getAddress().equals(" ")) {
             System.out.println(" address unknown");
         } else {
-        
+
             try {
 
                 System.out.println(" address: " + people.get(who).getAddress());
@@ -215,51 +217,113 @@ public class Interface {
     }
 
     public void keywordSearch() {
-        System.out.println("keyword (if empty, all listed): ");
+        //filtered search by keyword (retrieving a list must be sorted by name
+        //in alphabetic order). Can be in name or address.
+        System.out.print("keyword (if empty, all listed): ");
         String keyword = reader.next();
-        
-        List<String> namesAndAddresses = new ArrayList<String>();
-            
-        for (String name : people.keySet()){
-                namesAndAddresses.add(name);
-                namesAndAddresses.add(people.get(name).getAddress());
-            }
-        
-        namesAndAddresses.sort(c);
-        
-        //add for loop for keyset to nest the following in
-        for (String item : namesAndAddresses){
-            if(item.contains(keyword)){
-                        if (people.get(item).getAddress().equals(" ")) {
-            System.out.println(" address unknown");
-        } else {
-        
-            try {
 
-                System.out.println(" address: " + people.get(item).getAddress());
-            } catch (Exception e) {
-                System.out.println("  address unknown");
-            }
-        }
+        List alphabeticKeys = new ArrayList<String>(people.keySet());
 
-        if (people.get(item).getNumbers().isEmpty()) {
-            System.out.println("  phone number not found");
-        } else {
+        Collections.sort(alphabeticKeys);
 
-            try {
-                System.out.println(" phone numbers: ");
-                for (String number : people.get(item).numbers) {
-                    System.out.println("  " + number);
+        if (keyword.equals("")) {                                                //NOT WORKDING
+            for (Object key : alphabeticKeys) {
+                if (people.get(key).getAddress().equals(" ")) {
+                    System.out.println(" address unknown");
+                } else {
+
+                    try {
+
+                        System.out.println(" address: " + people.get(key).getAddress());
+                    } catch (Exception e) {
+                        System.out.println("  address unknown");
+                    }
                 }
-            } catch (Exception e) {
-                System.out.println("  phone number not found");
+
+                if (people.get(key).getNumbers().isEmpty()) {
+                    System.out.println("  phone number not found");
+                } else {
+
+                    try {
+                        System.out.println(" phone numbers: ");
+                        for (String number : people.get(key).numbers) {
+                            System.out.println("  " + number);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("  phone number not found");
+                    }
+                }
             }
-        } else {
-            System.out.println(" not found");
         }
 
+        for (Object key : alphabeticKeys) {
+            String keyString = key.toString();
+            //System.out.println(keyString);        //duplicate key printed
+            
+            if (people.get(key).getAddress().contains(keyword)) {
+                System.out.println(key);
+
+                if (people.get(key).getAddress().equals(" ")) {
+                    System.out.println(" address unknown");
+                } else {
+
+                    try {
+
+                        System.out.println(" address: " + people.get(key).getAddress());
+                    } catch (Exception e) {
+                        System.out.println("  address unknown");
+                    }
+                }
+
+                if (people.get(key).getNumbers().isEmpty()) {
+                    System.out.println("  phone number not found");
+                } else {
+
+                    try {
+                        System.out.println(" phone numbers: ");
+                        for (String number : people.get(key).numbers) {
+                            System.out.println("  " + number);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("  phone number not found");
+                    }
+                }
+
+                
+            }else if (keyString.equals(keyword)) {
+                System.out.println(key);
+
+                if (people.get(key).getAddress().equals(" ")) {
+                    System.out.println(" address unknown");
+                } else {
+
+                    try {
+
+                        System.out.println(" address: " + people.get(key).getAddress());
+                    } catch (Exception e) {
+                        System.out.println("  address unknown");
+                    }
+                }
+
+                if (people.get(key).getNumbers().isEmpty()) {
+                    System.out.println("  phone number not found");
+                } else {
+
+                    try {
+                        System.out.println(" phone numbers: ");
+                        for (String number : people.get(key).numbers) {
+                            System.out.println("  " + number);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("  phone number not found");
+                    }
+                }
+            }
+            
+        }
+        System.out.println("");
+        command();
     }
-     
 }
 /*
 Notes:
