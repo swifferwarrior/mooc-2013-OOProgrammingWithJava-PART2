@@ -1,22 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package UserInterface;
+import UserInterface.Interface;
 
-/**
- *
- * @author Admin
- */
 public class Main {
     public static void main(String[] args) {
         Interface what = new Interface();
-        //what.getPeople().put("Kristian", new PersonalInfo());
-        //what.getPeople().put("Jarissa", new PersonalInfo());
-        
-        //what.getPeople().get("Kristian").setAddress("123 Electric Ave", "Algood");
-        //111what.getPeople().get("Jarissa").setAddress("2005 N Washington", "Cookeville");
         
         what.start();
     }
