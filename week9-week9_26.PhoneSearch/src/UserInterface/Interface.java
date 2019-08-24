@@ -46,37 +46,49 @@ public class Interface {
             if (command.equals("1")) {
                 //add a number
                 addNumber();
+                break;
             }
 
             if (command.equals("2")) {
                 //search for a number
                 searchForNumber();
+                break;
             }
 
             if (command.equals("3")) {
                 //search for a person by phone number
                 searchByNumber();
+                break;
             }
 
             if (command.equals("4")) {
                 //add an address
                 addAddress();
+                break;
             }
 
             if (command.equals("5")) {
                 //search for personal information
                 personalInfo();
+                break;
             }
 
             if (command.equals("6")) {
                 //delete personal information
                 removePersonalInfo();
+                break;
             }
 
             if (command.equals("7")) {
                 //filtered listing
                 keywordSearch();
+                break;
                 //System.out.println("uncomment keywordSearch()");
+            }
+            
+            if (command.equals("help")) {
+                start();
+                break;
             }
 
             if (command.equals("x")) {
@@ -96,6 +108,7 @@ public class Interface {
     }
 
     public void addNumber() {
+        //needs prompt for no number
         System.out.print("whose number: ");
         String who = reader.next();
         System.out.print("number: ");
@@ -326,18 +339,9 @@ public class Interface {
     }
 }
 /*
-Notes:
+POST-SUBMIT NOTES
 
-HashMap <Person, String#> People
-HashMap <String, Person> Numbers
-
-or
-
-Person has String name and String number
-HashMap String, String for both
-
-Person class
-    String address
-    <String> number
-    String name
+1. Multiple choice operations
+        When choosing between 1-7 and x, each option needs to have a break at the end
+        or there will be a loop constantly asking for commands despite quitting.
  */
