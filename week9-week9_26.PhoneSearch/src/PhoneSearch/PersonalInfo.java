@@ -1,5 +1,5 @@
 
-package UserInterface;
+package PhoneSearch;
 
 import java.util.List;
 import java.util.ArrayList;
