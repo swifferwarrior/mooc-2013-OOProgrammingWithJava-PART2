@@ -21,6 +21,7 @@ public class Bird {
     //Two Bird objects have to be understood as the same bird if their Latin name
     //and observation year are the same.
     
+    @Override
     public boolean equals(Object other){
         if (other == null ||this.getClass() != other.getClass()){
             return false;
@@ -39,8 +40,9 @@ public class Bird {
         return true;
     }
     
+    @Override
     public int hashCode(){
-        return this.ringingYear + this.name.hashCode();
+        return this.ringingYear + this.latinName.hashCode();
     }
 
     public String getName() {
