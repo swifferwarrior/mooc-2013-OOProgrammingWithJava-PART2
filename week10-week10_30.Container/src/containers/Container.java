@@ -30,7 +30,7 @@ public class Container {
 
     public void addToTheContainer(double amount) {
         if (amount < 0) {
-            return;
+            volume = 0;
         }
         if (amount <= getCurrentCapacity()) {
             volume = volume + amount;
