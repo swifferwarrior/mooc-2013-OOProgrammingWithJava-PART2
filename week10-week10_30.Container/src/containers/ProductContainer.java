@@ -20,6 +20,10 @@ public class ProductContainer extends Container{
     public String getName(){
         return this.name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     
     @Override
     public String toString(){

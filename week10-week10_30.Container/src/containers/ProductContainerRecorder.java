@@ -15,10 +15,18 @@ public class ProductContainerRecorder extends ProductContainer {
         return this.history.toString();
     }
     
+    @Override
     public void addToTheContainer(double amount) {
         //works like method in Container, but new situation is recorded in the history
         super.addToTheContainer(amount);
         this.history.add(super.getVolume());
+    }
+    
+    @Override
+    public double takeFromTheContainer(double amount) {
+        double leftover = super.takeFromTheContainer(amount);
+        this.history.add(super.getVolume());
+        return leftover;
     }
     
     public void printAnalysis(){
@@ -29,6 +37,6 @@ public class ProductContainerRecorder extends ProductContainer {
         System.out.println("Smallest product amount: " + this.history.minValue());
         System.out.println("Average: " + this.history.average());
         System.out.println("Greatest change: " + this.history.greatestFluctuation());
-        System.out.println("Variance : " + this.history.variance());
+        System.out.println("Variance: " + this.history.variance());
     }
 }

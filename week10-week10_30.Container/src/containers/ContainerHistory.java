@@ -23,31 +23,36 @@ public class ContainerHistory {
     }
 
     public String toString() {
-        return history.toString();
+        return this.history.toString();
     }
 
     public double maxValue() {
         //returns the greatest value in the container history. If history is empty, returns 0;
-        List<Double> descendingValue = this.history;
-        Collections.sort(history);
         if (history.isEmpty()) {
             return 0;
         }
 
-        double maxValue = descendingValue.get(0);
+        double maxValue = this.history.get(0);
+        for (double number : this.history) {
+            if (number > maxValue) {
+                maxValue = number;
+            }
+        }
         return maxValue;
     }
 
     public double minValue() {
         //returns the smallest value in teh container history. If the history is empty, returns 0;
-        List<Double> ascendingValue = this.history;
-        Collections.sort(history);
-
         if (history.isEmpty()) {
             return 0;
         }
 
-        double minValue = ascendingValue.get(ascendingValue.size() - 1);
+        double minValue = this.history.get(0);
+        for (double number : this.history) {
+            if (number < minValue) {
+                minValue = number;
+            }
+        }
         return minValue;
     }
 
@@ -72,17 +77,25 @@ public class ContainerHistory {
         if (this.history.size() <= 1) {
             return 0;
         }
+
+        double maxFluctuation = 0;
+        double i = 0;
         
-        List<Double> fluctuations = new ArrayList<Double>();
-        for (double number : this.history){
-            double fluctuation = number - (this.history.indexOf(number + 1));
-            if (fluctuation < 0){
-                fluctuation = fluctuation * -1;
+        for (double number : this.history) {
+            //double contender = this.history.get((int) (i+1));
+            double fluctuation = number - (this.history.get((int) (i + 1)));
+            if (fluctuation < 0) {
+                fluctuation *= (-1);
             }
-            fluctuations.add(fluctuation);
+            if (fluctuation > maxFluctuation){
+                maxFluctuation = fluctuation;
+            }
+            i++;
+            if (i >= this.history.size()-1){
+                break;
+            }
         }
-        Collections.sort(fluctuations);
-        return fluctuations.get(0);
+        return maxFluctuation;
     }
 
     public double variance() {
@@ -91,15 +104,13 @@ public class ContainerHistory {
         if (this.history.size() <= 1) {
             return 0;
         }
-        int n = 0;
         double sampleSum = 0;
-        double avg = average();
+        double avg = this.average();
         for (double number : this.history) {
             double sample = (number - avg) * (number - avg);
             sampleSum += sample;
-            n++;
         }
-        double variance = (sampleSum / (n - 1));
+        double variance = (sampleSum / (this.history.size() - 1));
         return variance;
 
     }
