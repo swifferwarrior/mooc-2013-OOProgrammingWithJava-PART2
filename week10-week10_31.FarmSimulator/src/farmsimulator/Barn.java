@@ -19,6 +19,7 @@ public class Barn {
     public void installMilkingRobot(MilkingRobot milkingRobot) {
         //installs a milking robot and connects it to the barn bulk tank
         this.robot = milkingRobot;
+        this.robot.setBulkTank(this.tank); //don't forget to do this part too!!!
     }
 
     public void takeCareOf(Cow cow) {
@@ -49,3 +50,9 @@ public class Barn {
         return this.tank.toString();
     }
 }
+
+/* POST-SUBMIT NOTES */
+/*
+1. INSTALLING MILK ROBOT
+        I set the robot for this class, but i forgot to set the bulk tank in the milking robot class.
+*/
