@@ -25,22 +25,21 @@ public class Barn {
     public void takeCareOf(Cow cow) {
         //milks the parameter cow with the help of the milking robot
         //throws IllegalStateException if milking robot hasn't been installed
-        try {
-            this.robot.milk(cow);
-        } catch (IllegalStateException e) {
-            System.out.println("The MilkingRobot hasn't been installed");
+        if (this.robot == null) {
+            throw new IllegalStateException("The MilkingRobot hasn't been installed");
         }
+        this.robot.milk(cow);
     }
 
     public void takeCareOf(Collection<Cow> cows) {
         //milks the parameter cows with the help of the milking robot
         //throws IllegalStateException if the robot hasn't been installed
-        try {
-            for (Cow cow : cows){
-                this.robot.milk(cow);
-            }
-        } catch (IllegalStateException e) {
-            System.out.println("The MilkingRobot hasn't been installed");
+        if (this.robot == null) {
+            throw new IllegalStateException("The MilkingRobot hasn't been installed");
+        }
+
+        for (Cow cow : cows) {
+            this.robot.milk(cow);
         }
     }
 
@@ -52,7 +51,7 @@ public class Barn {
 }
 
 /* POST-SUBMIT NOTES */
-/*
+ /*
 1. INSTALLING MILK ROBOT
         I set the robot for this class, but i forgot to set the bulk tank in the milking robot class.
-*/
+ */

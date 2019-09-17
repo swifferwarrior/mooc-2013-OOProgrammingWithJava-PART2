@@ -22,20 +22,26 @@ public class MilkingRobot {
         return this.tank;
     }
     
-    void setBulkTank(BulkTank tank){
+    public void setBulkTank(BulkTank tank){
         //installs parameter bulk tank to the milking robot
         this.tank = tank;
     }
     
-    void milk (Milkable milkable){
+    public void milk (Milkable milkable){
         //milks the cow and fills the connected bulk tank; the method returns
         //an IllegalStateException if no tank has been fixed
-        try{
+        if (this.tank == null) {
+            throw new IllegalStateException("The MilkingRobot hasn't been installed");
+        }
             Cow cow = (Cow) milkable;
             this.tank.addToTank(cow.getAmount());
             milkable.milk();
-        } catch (IllegalStateException e){
-            System.out.println("The MilkingRobot hasn't been installed");
-        }
     }
 }
+
+/* POST-SUBMIT NOTES */
+/*
+1. THROWING EXCEPTION
+        Instead of using a try/catch exception for milk(), threw a new exception 
+        if this.tank was null
+*/

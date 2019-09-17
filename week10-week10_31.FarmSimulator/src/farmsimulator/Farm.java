@@ -26,12 +26,12 @@ public class Farm implements Alive {
     public List<Cow> getCows() {
         return cows;
     }
-    
-    public void addCow(Cow cow){
+
+    public void addCow(Cow cow) {
         this.cows.add(cow);
     }
-    
-    public void installMilkingRobot (MilkingRobot robot){
+
+    public void installMilkingRobot(MilkingRobot robot) {
         barn.installMilkingRobot(robot);
     }
 
@@ -59,7 +59,7 @@ public class Farm implements Alive {
                 animals += "        " + cow.toString() + "\n";
             }
         }
-        
+
         return "Farm owner: " + this.owner + "\n"
                 + "Barn bulk tank: " + this.barn.getBulkTank() + "\n"
                 + animals;

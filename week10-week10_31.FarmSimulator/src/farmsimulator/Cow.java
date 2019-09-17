@@ -23,7 +23,7 @@ public class Cow implements Milkable, Alive {
 
     public Cow() {
         int assignName = random.nextInt(NAMES.length - 1);
-        
+
         this.name = NAMES[assignName];
         this.capacity = 15 + random.nextInt(25);
         this.amtAvailable = 0;
@@ -50,18 +50,24 @@ public class Cow implements Milkable, Alive {
 
     @Override
     public String toString() {
-        return this.name + " " + this.amtAvailable + "/" + this.capacity;
+        return this.name + " " + Math.ceil(this.amtAvailable) + "/" + Math.ceil(this.capacity);
     }
 
     @Override
+    //Amount of milked milk (0.0) was not the same as the cow's amount of milk)
     public double milk() {
+        double milked = this.amtAvailable;
         this.amtAvailable = 0;
-        return this.amtAvailable;
+        return milked;
     }
 
     @Override
     public void liveHour() {
-        this.amtAvailable += (7 + random.nextInt(13))/10;
+
+        this.amtAvailable += (.7 + (random.nextDouble() * 1.3));
+        if (this.amtAvailable > this.capacity) {
+            this.amtAvailable = this.capacity;
+        }
     }
 
 }
