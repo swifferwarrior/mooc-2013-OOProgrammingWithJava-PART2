@@ -11,8 +11,35 @@ public class NoticeBoard implements Runnable {
 
     @Override
     public void run() {
+        frame = new JFrame();
+        frame.setPreferredSize(new Dimension(400, 300));
+        
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
+        createComponents(frame.getContentPane());
+        
+        frame.pack();
+        frame.setVisible(true);
     }
 
     private void createComponents(Container container) {
+        GridLayout layout = new GridLayout(3, 1);
+        container.setLayout(layout);
+        
+        JTextField north = new JTextField();        
+        JButton copy = new JButton("Copy!");
+        JLabel south = new JLabel();
+
+        
+        ActionEventListener copier = new ActionEventListener(north,south);
+        copy.addActionListener(copier);
+        
+        container.add(north);
+        container.add(copy);
+        container.add(south);
+    }
+    
+    public JFrame getFrame(){
+        return frame;
     }
 }
