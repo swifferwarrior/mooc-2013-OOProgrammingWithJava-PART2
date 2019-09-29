@@ -5,8 +5,6 @@ import java.awt.Graphics;
 
 public class Circle extends Figure {
 
-    private int x;
-    private int y;
     private int diameter;
 
     public Circle(int x, int y, int diameter) {
@@ -36,3 +34,10 @@ public class Circle extends Figure {
     }
 
 }
+
+/* POST-SUBMIT NOTES */
+/*
+1. Coordinates
+        Coordinates must be accessed from the superclass via getX and getY. 
+        Each shape does not need it's own x and y in the constructor. just the super.
+*/

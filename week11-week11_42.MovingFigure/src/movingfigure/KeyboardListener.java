@@ -26,6 +26,8 @@ public class KeyboardListener implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             figure.move(0, 1);
         }
+        
+        component.repaint();
     }
 
     @Override
@@ -36,4 +38,11 @@ public class KeyboardListener implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    
 }
+/* POST-SUBMIT NOTES */
+/*
+1. Remember to repaint 
+        Objects will move but won't register on the drawingboard unless you 
+        repaint after every keypress
+*/

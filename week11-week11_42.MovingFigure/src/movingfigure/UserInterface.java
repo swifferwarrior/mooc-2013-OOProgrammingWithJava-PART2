@@ -36,7 +36,7 @@ public class UserInterface implements Runnable {
     }
 
     private void addListeners() {
-        frame.addKeyListener(new KeyboardListener(frame, this.figure));
+        frame.addKeyListener(new KeyboardListener(frame, figure));
 
     }
 
