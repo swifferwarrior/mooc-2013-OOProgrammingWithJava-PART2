@@ -16,7 +16,7 @@ import java.util.List;
 public class Employees {
 
     private List<Person> employees = new ArrayList<Person>();
-    private Iterator<Person> employed = employees.iterator();
+    //private Iterator<Person> iterator = employees.iterator();
 
     public Employees() {
     }
@@ -26,7 +26,7 @@ public class Employees {
         employees.add(person);
     }
 
-    public void ad(List<Person> persons) {
+    public void add(List<Person> persons) {
         //adds the parameter list of people to the employees
         Iterator<Person> iterator = persons.iterator();
 
@@ -37,24 +37,28 @@ public class Employees {
 
     public void print() {
         //prints all the employees
-        while (employed.hasNext()) {
-            System.out.println(employed.next());
+        Iterator<Person> iterator = employees.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 
     public void print(Education education) {
         //prints all the employess who have the same education as the one specified
-        while(employed.hasNext()){
-            if(employed.next().getEducation().equals(education)){
-                System.out.println(employed.next());
+        Iterator<Person> iterator = employees.iterator();
+        while(iterator.hasNext()){
+            Person employee = iterator.next();
+            if(employee.getEducation().equals(education)){
+                System.out.println(employee);
             }
         }
     }
     
     public void fire(Education education){
-        while(employed.hasNext()){
-            if(employed.next().getEducation().equals(education)){
-                employed.remove();
+        Iterator<Person> iterator = employees.iterator();
+        while(iterator.hasNext()){
+            if(iterator.next().getEducation().equals(education)){
+                iterator.remove();
             }
         }
     }
