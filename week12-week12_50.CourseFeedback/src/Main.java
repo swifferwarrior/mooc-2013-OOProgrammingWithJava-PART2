@@ -6,5 +6,6 @@ public class Main {
                 "Course is over!\n" + 
                 "After you have submitted this exercise, remember to give us " + 
                 "some feedback about this course\n");
+        System.out.println("Stooofs");
     }
 }
